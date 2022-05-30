@@ -11,6 +11,7 @@ public class App {
         int [][] C = new int[N][N];
         Matrix matriz = new Matrix();
 
+        //HOla amigos del youtube
         /**
          * Rellenado de las matrices con numeros aleatorios
          */
