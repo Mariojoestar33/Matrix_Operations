@@ -30,7 +30,7 @@ public class Matrix {
      * @param A   matriz a Multiplicar A
      * @param B   matriz a Multiplicar B
      */
-    public void multiplicarMatrizBasico(int [][] A, int [][] B) {
+    public int[][] multiplicarMatrizBasico(int [][] A, int [][] B) {
         int [][] C = new int[A.length][B[0].length];
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < B[0].length; j++) {
@@ -39,7 +39,8 @@ public class Matrix {
                 }
             }
         }
-        imprimirMatriz(C);
+        //imprimirMatriz(C);
+        return C;
     }
 
     /**
@@ -47,17 +48,19 @@ public class Matrix {
      * @param A matriz a Multiplicar A
      * @param B matriz a Multiplicar B   
      */
-    public void multiplicacionMatrizRecursiva(int [][] A,int [][] B)
+    public int[][] multiplicacionMatrizRecursiva(int [][] A,int [][] B)
    {
        if (A[0].length==B.length)
  
        {
            int[][] C = new int[A.length][B[0].length];
            multiplicacionMatrizRecursiva(A, B, C, 0);
-           imprimirMatriz(C);
+           return C;
+           //imprimirMatriz(C);
        }else
        {
            System.out.println("Matrices ingresadas no son compatibles");
+           return null;
        }
    }
  
