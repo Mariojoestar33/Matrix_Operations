@@ -26,7 +26,7 @@ public class Matrix {
     }
 
     /**
-     * Multiplica dos matrices
+     * Multiplica dos matrices de manera tradicional
      * @param A   matriz a Multiplicar A
      * @param B   matriz a Multiplicar B
      */
@@ -48,49 +48,38 @@ public class Matrix {
      * @param A matriz a Multiplicar A
      * @param B matriz a Multiplicar B   
      */
-    public int[][] multiplicacionMatrizRecursiva(int [][] A,int [][] B)
-   {
-       if (A[0].length==B.length)
- 
-       {
+    public int[][] multiplicacionMatrizRecursiva(int [][] A,int [][] B) {
+       if (A[0].length==B.length) {
            int[][] C = new int[A.length][B[0].length];
            multiplicacionMatrizRecursiva(A, B, C, 0);
            return C;
            //imprimirMatriz(C);
-       }else
-       {
+        } else {
            System.out.println("Matrices ingresadas no son compatibles");
            return null;
-       }
-   }
+            }
+    }
  
-   private void multiplicacionMatrizRecursiva(int [][] A,int [][] B,int [][]C,int i)
-   {
- 
-       if (i<A.length)
-       {
+    private void multiplicacionMatrizRecursiva(int [][] A,int [][] B,int [][]C,int i) {
+       if (i<A.length) {
            multiplicacionMatrizRecursiva(A,B,C,i,0);
            multiplicacionMatrizRecursiva(A,B,C,i+1);
-       }
-   }
+        }
+    }
  
-   private void multiplicacionMatrizRecursiva(int [][]A,int [][]B,int [][]C,int i,int j)
-   {
-       if (j<B[0].length)
-       {
+    private void multiplicacionMatrizRecursiva(int [][]A,int [][]B,int [][]C,int i,int j) {
+       if (j<B[0].length) {
            multiplicacionMatrizRecursiva(A,B,C,i,j,0);
            multiplicacionMatrizRecursiva(A,B,C,i,j+1);
-       }
-   }
+        }
+    }
  
-   private void multiplicacionMatrizRecursiva(int [][]A,int [][]B,int [][]C,int i,int j,int k)
-   {
-       if (k<A[0].length)
-       {
+    private void multiplicacionMatrizRecursiva(int [][]A,int [][]B,int [][]C,int i,int j,int k) {
+       if (k<A[0].length) {
            C[i][j] += A[i][k] * B[k][j];
            multiplicacionMatrizRecursiva(A,B,C,i,j,k+1);
-       }
-   }
+        }
+    }
 
    /**
     * Multiplica dos matrices de con el algoritmo de Strassen 
@@ -109,22 +98,18 @@ public class Matrix {
         int[][] b = new int[n / 2][n / 2];
         int[][] c = new int[n / 2][n / 2];
         int[][] d = new int[n / 2][n / 2];
-
         int[][] e = new int[n / 2][n / 2];
         int[][] f = new int[n / 2][n / 2];
         int[][] g = new int[n / 2][n / 2];
         int[][] h = new int[n / 2][n / 2];
-
         dividirArreglo(A, a, 0, 0);
         dividirArreglo(A, b, 0, n / 2);
         dividirArreglo(A, c, n / 2, 0);
         dividirArreglo(A, d, n / 2, n / 2);
-
         dividirArreglo(B, e, 0, 0);
         dividirArreglo(B, f, 0, n / 2);
         dividirArreglo(B, g, n / 2, 0);
         dividirArreglo(B, h, n / 2, n / 2);
-       
         int[][] p1 = multiplicacionMatrizStrassen(crearMatriz(a, d), crearMatriz(e, h));
         int[][] p2 = multiplicacionMatrizStrassen(crearMatriz(c,d),e);
         int[][] p3 = multiplicacionMatrizStrassen(a, subMatriz(f, h));           
@@ -132,12 +117,10 @@ public class Matrix {
         int[][] p5 = multiplicacionMatrizStrassen(crearMatriz(a,b), h);
         int[][] p6 = multiplicacionMatrizStrassen(subMatriz(c, a), crearMatriz(e, f));
         int[][] p7 = multiplicacionMatrizStrassen(subMatriz(b, d), crearMatriz(g, h));
-       
         int[][] C11 = crearMatriz(subMatriz(crearMatriz(p1, p4), p5), p7);
         int[][] C12 = crearMatriz(p3, p5);
         int[][] C21 = crearMatriz(p2, p4);
         int[][] C22 = crearMatriz(subMatriz(crearMatriz(p1, p3), p2), p6);
-
         copiarSubArreglo(C11, C, 0, 0);
         copiarSubArreglo(C12, C, 0, n / 2);
         copiarSubArreglo(C21, C, n / 2, 0);
@@ -168,18 +151,20 @@ public class Matrix {
         return C;
     }
 
-    public static void dividirArreglo(int[][] P, int[][] C, int iB, int jB) 
-    {
-        for(int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++)
-            for(int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++)
+    public static void dividirArreglo(int[][] P, int[][] C, int iB, int jB) {
+        for(int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++) {
+            for(int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++) {
                 C[i1][j1] = P[i2][j2];
+            }
+        }
     }
 
-    public static void copiarSubArreglo(int[][] C, int[][] P, int iB, int jB) 
-    {
-        for(int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++)
-            for(int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++)
+    public static void copiarSubArreglo(int[][] C, int[][] P, int iB, int jB) {
+        for(int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++) {
+            for(int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++) {
                 P[i2][j2] = C[i1][j1];
+            }
+        }
     }  
 
 }
